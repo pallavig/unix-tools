@@ -1,0 +1,29 @@
+package pallavig.unixtools.head;
+
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+
+public class HeadTest {
+    @Test
+    public void testGetHeader() throws Exception {
+        String data = "a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk\nl";
+        String expected = "a\nb\nc\nd\ne\nf\ng\nh\ni\nj\n";
+        Head head = new Head(data);
+
+        String actual = head.getHeader();
+
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testHeaderWhenLessLinesPresentThanExpected() throws Exception {
+        String data = "pallavi\ngoliwale";
+        String expected = "pallavi\ngoliwale\n";
+        Head head = new Head(data);
+
+        String actual = head.getHeader();
+
+        assertEquals(expected,actual);
+    }
+}
