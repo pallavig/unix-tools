@@ -11,11 +11,11 @@ public class Head {
         String headerData = "";
         String[] linesInData = data.split("\n");
         try {
-             for (int i =0;i<10;i++){
+             for (int i =0; i < 10; i++){
                  headerData = headerData.concat(linesInData[i]).concat("\n");
              }
         } catch(Exception e){
         }
-        return headerData;
+        return headerData.substring(0,headerData.length()-1);
     }
 }
