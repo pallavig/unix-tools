@@ -15,7 +15,7 @@ public class Head {
         String headerData = "";
         String[] linesInData = data.split("\n");
         try {
-             for (int i =0; i < numberOfRows; i++){
+             for (int i = 0; i < numberOfRows; i++){
                  headerData = headerData.concat(linesInData[i]).concat("\n");
              }
         } catch(Exception e){
