@@ -13,5 +13,3 @@ public class HeadOptionProcessor {
         filename = args[0];
     }
 }
-
-

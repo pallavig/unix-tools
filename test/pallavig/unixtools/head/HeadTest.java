@@ -9,7 +9,7 @@ public class HeadTest {
     public void testGetHeader() throws Exception {
         String data = "a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk\nl";
         String expected = "a\nb\nc\nd\ne\nf\ng\nh\ni\nj";
-        Head head = new Head(data);
+        Head head = new Head(data,10);
 
         String actual = head.getHeader();
 
@@ -20,7 +20,7 @@ public class HeadTest {
     public void testHeaderWhenLessLinesPresentThanExpected() throws Exception {
         String data = "pallavi\ngoliwale";
         String expected = "pallavi\ngoliwale";
-        Head head = new Head(data);
+        Head head = new Head(data,10);
 
         String actual = head.getHeader();
 
@@ -31,7 +31,7 @@ public class HeadTest {
     public void testHeaderWhenDataIsEmptyString() throws Exception {
         String data = "";
         String expected = "";
-        Head head = new Head(data);
+        Head head = new Head(data,10);
 
         String actual = head.getHeader();
 

@@ -3,10 +3,6 @@ package pallavig.unixtools.head;
 public class Head {
     private String data;
     private int numberOfRows;
-    public Head(String fileData){
-        numberOfRows = 10;
-        data = fileData;
-    }
     public Head(String fileData,int requiredNumberOfRows){
         numberOfRows = requiredNumberOfRows;
         data = fileData;
