@@ -10,11 +10,12 @@ public class FileContentReader {
         try {
             BufferedReader br = new BufferedReader(new FileReader(filename));
             while ((sCurrentLine = br.readLine()) != null) {
-                data += sCurrentLine;
+                data += sCurrentLine + "\n";
             }
         } catch (Exception e) {
             System.err.println("Problem in reading file");
         }
+        data = data.substring(0, data.length() - 1);
         return data;
     }
 }
