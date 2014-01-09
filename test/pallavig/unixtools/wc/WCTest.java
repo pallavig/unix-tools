@@ -38,4 +38,38 @@ public class WCTest {
 
         assertEquals(expectedNumberOfWords,actualNumberOfWords);
     }
+
+    @Test
+    public void testCOuntWordsWhenMoreThanOneSpaceBetweenWords() throws Exception {
+        String data = "pallavi prakash    goliwale";
+        WC wc = new WC(data);
+        int expectedNumberOfWords = 3;
+
+        int actualNumberOfWords = wc.countWords();
+
+        assertEquals(expectedNumberOfWords,actualNumberOfWords);
+    }
+
+    @Test
+    public void testCountWordsWhenNewLInePresentInData() throws Exception {
+        String data = "pallavi\nprakash\ngoliwale";
+        WC wc = new WC(data);
+        int expectedNumberOfWords = 3;
+
+        int actualNumberOfWords = wc.countWords();
+
+        assertEquals(expectedNumberOfWords,actualNumberOfWords);
+    }
+
+    @Test
+    public void testCountWordsWhenCommaPresent() throws Exception {
+        String data = "pallavi,prakash,goliwale";
+        WC wc = new WC(data);
+        int expectedNumberOfWords = 3;
+
+        int actualNumberOfWords = wc.countWords();
+
+        assertEquals(expectedNumberOfWords,actualNumberOfWords);
+
+    }
 }

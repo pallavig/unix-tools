@@ -18,7 +18,7 @@ public class WC {
     }
 
     public int countWords() {
-        int numberOfWords = data.split(" ").length;
+        int numberOfWords = data.split("\\W+").length;
         return numberOfWords;
     }
 }
