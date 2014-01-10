@@ -8,8 +8,7 @@ public class SpaceReducer {
     }
 
     public String reduceSpaces() {
-        fileData = fileData.replaceAll("( )+", " ");
-        System.out.println(fileData);
+        fileData = fileData.replaceAll(" +", " ");
         return fileData;
     }
 }
