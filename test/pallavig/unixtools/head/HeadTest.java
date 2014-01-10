@@ -37,15 +37,4 @@ public class HeadTest {
 
         assertEquals(expected,actual);
     }
-
-    @Test
-    public void testHeaderWithSpecificNumberOfLines() throws Exception {
-        String data = "pallavi\nprakash\ngoliwale";
-        String expected = "pallavi\nprakash";
-        Head head = new Head(data,2);
-
-        String actual = head.getHeader();
-
-        assertEquals(expected,actual);
-    }
 }
