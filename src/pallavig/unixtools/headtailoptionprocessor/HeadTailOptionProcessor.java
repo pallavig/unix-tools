@@ -1,9 +1,9 @@
-package pallavig.unixtools.head;
+package pallavig.unixtools.headtailoptionprocessor;
 
-public class HeadOptionProcessor {
+public class HeadTailOptionProcessor {
     public int numberOfRows;
     public String filename;
-    public HeadOptionProcessor(String[] args){
+    public HeadTailOptionProcessor(String[] args){
         if(args[0].startsWith("-")){
             numberOfRows = Integer.parseInt(args[0].substring(1));
             filename = args[1];
