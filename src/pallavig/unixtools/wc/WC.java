@@ -13,7 +13,7 @@ public class WC {
     }
 
     public int countCharacters() {
-        int numberOfCharacters = data.length();
+        int numberOfCharacters = data.length() + countLines();
         return numberOfCharacters;
     }
 

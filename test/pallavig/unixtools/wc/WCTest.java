@@ -18,9 +18,9 @@ public class WCTest {
 
     @Test
     public void testCountCharacters() throws Exception {
-        String data = "pallavi prakash";
+        String data = "pipe\na";
         WC wc = new WC(data);
-        int expectedNumberOfCharacters = 15;
+        int expectedNumberOfCharacters = 7;
 
         int actualNumberOfCharacters = wc.countCharacters();
 
