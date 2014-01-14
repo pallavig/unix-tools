@@ -12,18 +12,14 @@ public class WcClient {
         FileContentReader fcr = new FileContentReader();
         String fileData = fcr.readFile(fileName);
         WC lib = new WC(fileData);
-        if(wcOption.isCountWords){
-            numberOfLines = lib.countLines();
-            System.out.print(numberOfLines + "\t");
-        }
-        if(wcOption.isCountWords){
-            numberOfWords = lib.countWords();
-            System.out.print(numberOfWords + "\t");
-        }
-        if(wcOption.isCountCharacters){
-            numberOfCharacters = lib.countCharacters();
-            System.out.print(numberOfCharacters + "\t");
-        }
-        System.out.println(fileName);
+        StringBuilder finalResult = new StringBuilder();
+        if(wcOption.isCountLines)
+            finalResult.append(lib.countLines() + "\t");
+        if(wcOption.isCountWords)
+            finalResult.append(lib.countWords() + "\t");
+        if(wcOption.isCountCharacters)
+            finalResult.append(lib.countCharacters() + "\t");
+        finalResult.append(fileName);
+        System.out.println(finalResult);
     }
 }
