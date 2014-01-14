@@ -4,12 +4,30 @@ import java.util.Arrays;
 import java.util.List;
 
 public class WCOptionProcessor {
-    public boolean isCountLines;
-    public boolean isCountWords;
-    public boolean isCountCharacters;
-    public String fileName;
+    private boolean isCountLines;
+    private boolean isCountWords;
+    private boolean isCountCharacters;
+    private String fileName;
+
+    public boolean getIsCountLines() {
+        return isCountLines;
+    }
+
+    public boolean getIsCountWords() {
+        return isCountWords;
+    }
+
+    public boolean getIsCountCharacters() {
+        return isCountCharacters;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
     public WCOptionProcessor(String[] args) {
         for (String arg : args) {
+
             if(!arg.startsWith("-")){
                 fileName = arg;
             }

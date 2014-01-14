@@ -8,16 +8,16 @@ public class WcClient {
     public static void main(String[] args) {
         int numberOfLines = 0, numberOfWords = 0, numberOfCharacters = 0;
         WCOptionProcessor wcOption = new WCOptionProcessor(args);
-        String fileName = wcOption.fileName;
+        String fileName = wcOption.getFileName();
         FileContentReader fcr = new FileContentReader();
         String fileData = fcr.readFile(fileName);
         WC lib = new WC(fileData);
         StringBuilder finalResult = new StringBuilder();
-        if(wcOption.isCountLines)
+        if(wcOption.getIsCountLines())
             finalResult.append(lib.countLines() + "\t");
-        if(wcOption.isCountWords)
+        if(wcOption.getIsCountWords())
             finalResult.append(lib.countWords() + "\t");
-        if(wcOption.isCountCharacters)
+        if(wcOption.getIsCountCharacters())
             finalResult.append(lib.countCharacters() + "\t");
         finalResult.append(fileName);
         System.out.println(finalResult);
