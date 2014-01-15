@@ -16,11 +16,11 @@ public class CutOptionProcessor {
         String fieldOption = "-f";
         for (int i = 0; i < args.length; i++) {
             if (isSpecifiedOption(delimiterOption, args[i])) {
-                delimiter = args[i + 1];
+                delimiter = args[i].substring(2);
                 continue;
             }
             if (isSpecifiedOption(fieldOption, args[i])) {
-                String fields = args[i + 1];
+                String fields = args[i].substring(2);
                 String[] allfields = fields.split(",");
                 fieldNumbers = new int[allfields.length];
                 for (String field : allfields) {
@@ -32,10 +32,4 @@ public class CutOptionProcessor {
             fileName = args[i];
         }
     }
-//    public static void main(String[] args) {
-//        CutOptionProcessor cut = new CutOptionProcessor(args);
-//        System.out.println(cut.fieldNumbers[0] + " " + cut.fieldNumbers[1]);
-//        System.out.println(cut.fileName);
-//        System.out.println(cut.delimiter);
-//    }
 }
