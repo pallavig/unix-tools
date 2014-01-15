@@ -6,7 +6,7 @@ public class Uniq {
         this.fileData = fileData;
     }
     public String getUniqLines(){
-        String[] linesInData = fileData.split("\n");
+        String[] linesInData = fileData.split("\r\n");
         StringBuilder uniqueLines = new StringBuilder();
         String currentLine,previousLine = null;
         for (int i = 0; i < linesInData.length ; i++) {
@@ -15,7 +15,7 @@ public class Uniq {
                 previousLine = currentLine;
                 continue;
             }
-            uniqueLines.append(currentLine).append("\n");
+            uniqueLines.append(currentLine).append("\r\n");
             previousLine = currentLine;
         }
         return uniqueLines.toString();

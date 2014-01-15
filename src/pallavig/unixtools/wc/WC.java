@@ -8,12 +8,12 @@ public class WC {
     }
 
     public int countLines() {
-        int numberOfLines = data.split("\n").length - 1;
+        int numberOfLines = data.split("\r\n").length - 1;
         return numberOfLines;
     }
 
     public int countCharacters() {
-        int numberOfCharacters = data.length() + countLines();
+        int numberOfCharacters = data.length();
         return numberOfCharacters;
     }
 

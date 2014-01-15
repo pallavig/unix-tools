@@ -9,10 +9,10 @@ public class Head {
     }
     public String getHeader(){
         String headerData = "";
-        String[] linesInData = data.split("\n");
+        String[] linesInData = data.split("\r\n");
         try {
              for (int i = 0; i < numberOfRows; i++){
-                 headerData = headerData.concat(linesInData[i]).concat("\n");
+                 headerData = headerData.concat(linesInData[i]).concat("\r\n");
              }
         } catch(Exception e){
         }

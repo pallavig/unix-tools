@@ -11,10 +11,11 @@ public class FileContentReader {
         try {
             BufferedReader br = new BufferedReader(new FileReader(filename));
             while ((sCurrentLine = br.readLine()) != null) {
-                sb.append(sCurrentLine).append("\n");
+                sb.append(sCurrentLine).append("\r\n");
             }
         } catch (Exception e) {
             System.err.println("Problem in reading file");
+            System.exit(1);
         }
         data = sb.toString().substring(0,sb.length() - 1);
         return data;

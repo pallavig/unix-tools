@@ -9,12 +9,12 @@ public class Tail {
     }
     public String getLines(){
         StringBuilder sb = new StringBuilder();
-        String[] linesInData = data.split("\n");
+        String[] linesInData = data.split("\r\n");
         int counter = (linesInData.length)-numberOfRows;
         if(linesInData.length < numberOfRows)
             return data;
         while(counter < linesInData.length){
-            sb.append(linesInData[counter]).append("\n");
+            sb.append(linesInData[counter]).append("\r\n");
             counter++;
         }
         return sb.toString().substring(0,sb.length()-1);

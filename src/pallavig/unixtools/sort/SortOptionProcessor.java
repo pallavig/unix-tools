@@ -4,7 +4,7 @@ package pallavig.unixtools.sort;
 public class SortOptionProcessor {
     private String filename;
     private boolean isReverse = false;
-    private String delimiter;
+    private String delimiter = " ";
     private int fieldNumber = 1;
 
     public String getFilename() {
