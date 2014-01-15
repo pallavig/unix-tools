@@ -9,7 +9,7 @@ public class CutClient {
         CutOptionProcessor cop = new CutOptionProcessor(args);
         FileContentReader fcr = new FileContentReader();
         String fileData = fcr.readFile(cop.fileName);
-        Cut cut = new Cut(fileData,cop.fieldNo,cop.delimiter);
+        Cut cut = new Cut(fileData,cop.fieldNumbers,cop.delimiter);
         String result = cut.cutLines();
         System.out.println(result);
     }
