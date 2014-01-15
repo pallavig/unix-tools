@@ -1,15 +1,16 @@
 unix-tools
 ==========
 
-java implementation of unix-toolsunix-tools
-================================================================
-This is Repo contain different unix-tools. This tools will provide basic functionality of tools.
+INSTALLATION
+============
+Copy the folder from the given location
+Set an environment variable `UNIX_TOOLS` as the path to the given sh files and jar file
 
 ##WC
 
-This is Word Count unix tool,which counts number of words,characters and lines from given text.
+It counts number of words,characters and lines from given text.
 
-`PkWc.sh filename`
+`pgwc.sh filename`
 
 This has some optional arguments like `-l -w -c`
 
@@ -19,13 +20,86 @@ This has some optional arguments like `-l -w -c`
 
 `-c` -- fives number of characters
 
-
 This command will give number of lines,words,characters.
 
 You Have to give whole path of text file.
 
-For Example :- PkWc.sh a.txt will give `6 25 100 a.txt` as an output.
+For Example :- `pgwc.sh -l -w -c a.txt` will result in `6 25 100 a.txt`.
+
+File name should be the last argument
 
 ##Head
 
-This is head tool,which by default displays top 10 lines of file.
+It displays top 10 lines of file by default.
+
+`pghead.sh filename`
+
+This command will give top 10 lines from the text file given
+
+    Example: `pghead a.txt` will print 10 lines from a.txt file.
+
+`pghead.sh -[no.of lines] filename`
+
+    Example: `pghead.sh -11 a.txt` will display top 11 lines from a.txt file.
+
+Filename should be the last argument
+
+
+##Tail
+
+It displays 10 lines of file from bottom.
+
+`pgtail.sh filename`
+
+This command will give bottom 10 lines from the text file given
+
+    Example: `pgtail.sh a.txt` will print 10 lines from a.txt file.
+
+`pgtail.sh -[no.of lines] filename`
+
+This will give the no. of lines specified in given command.
+
+    Example: `pgtail.sh -4 a.txt` will display bottom 4 lines from a.txt file.
+
+Filename should be the last argument
+
+##Uniq
+
+This is Uniq tool,which discards one of successive identical lines from input but it will not discard indentical lines if they are not successive.
+
+`pguniq.sh filename`
+
+    Example: `pguniq.sh a.txt` will give all unique lines in a.txt file.
+
+##Cut
+
+This is Cut tool,which cuts and gives the output according to given command.
+
+`pgcut.sh -f[fieldno] -d[delimiter] filename`
+
+This command will display the contents of specified field
+
+    Example: pgcut.sh -f1,2 -d";" names.txt will display contents with single space of 1st fiels from a.txt
+
+Filename should be the last argument
+
+##Sort
+
+This is Sort tool, which sorts the given content with given option.
+
+`pgsort.sh -f[fieldnumber] -d[delimiter] -r filename`
+
+`-r` -- is for reverse
+
+    Example: `pgsort.sh -f1 -d";" -r a.txt` will display all contents from a.txt file in sorted order.
+
+Default delimiter is tab.
+
+
+##ReduceSpace
+
+This tool reducesspaces.
+`pgreducespaces.sh filename`
+
+
+Example: `pgreducespaces.sh a.txt`.
