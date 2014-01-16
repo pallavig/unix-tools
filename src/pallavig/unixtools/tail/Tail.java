@@ -17,6 +17,6 @@ public class Tail {
             sb.append(linesInData[counter]).append("\r\n");
             counter++;
         }
-        return sb.toString().substring(0,sb.length()-1);
+        return sb.toString().substring(0,sb.length()-2);
     }
 }

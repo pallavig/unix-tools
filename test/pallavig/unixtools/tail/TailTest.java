@@ -4,12 +4,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class TailTest {
+public class  TailTest {
     @Test
     public void testGetLines() throws Exception {
-        String data = "a\nb\nc";
+        String data = "a\r\nb\r\nc";
         Tail tail = new Tail(data,2);
-        String expected = "b\nc";
+        String expected = "b\r\nc";
 
         String actual = tail.getLines();
 
@@ -18,9 +18,9 @@ public class TailTest {
 
     @Test
     public void testGetLinesWhenLessLinesArePresentThanExpected(){
-        String data = "a\nb\nc";
+        String data = "a\r\nb\r\nc";
         Tail tail = new Tail(data,10);
-        String expected = "a\nb\nc";
+        String expected = "a\r\nb\r\nc";
 
         String actual = tail.getLines();
 
