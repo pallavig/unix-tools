@@ -12,26 +12,6 @@ public class Sort implements Comparator<String>{
     boolean isReverse;
     int fieldNumber;
     String delimiter;
-    public Sort(String fileData) {
-        this.fileData = fileData;
-        this.isReverse = false;
-        fieldNumber = 1;
-        delimiter = " ";
-    }
-
-    public Sort(String fileData,boolean isReverse) {
-        this.fileData = fileData;
-        this.isReverse = isReverse;
-        this.fieldNumber = 1;
-        delimiter = " ";
-    }
-
-    public Sort(String fileData,int fieldNumber){
-        this.fileData = fileData;
-        this.isReverse = false;
-        this.fieldNumber = fieldNumber;
-        delimiter = " ";
-    }
 
     public Sort(String fileData,int fieldNumber,boolean isReverse,String delimiter){
         this.fileData = fileData;
