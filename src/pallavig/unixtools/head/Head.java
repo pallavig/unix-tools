@@ -16,7 +16,7 @@ public class Head {
              }
         } catch(Exception e){
         }
-        headerData = headerData.substring(0,headerData.length()-1);
+        headerData = headerData.substring(0,headerData.length()-2);
         return  headerData;
     }
 }
