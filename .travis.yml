@@ -1,2 +1,2 @@
 language: java
-ant compile
+script: 'ant compile'
