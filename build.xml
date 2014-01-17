@@ -1,0 +1,28 @@
+<project name = "unix-tools">
+    <target name = "clear">
+        <delete dir = "classes"/>
+    </target>
+
+    <target name = "compile">
+        <mkdir dir = "classes"/>
+        <javac srcdir = "src" destdir = "classes" includeAntRuntime = "false"/>
+    </target>
+
+    <target name = "createFolderStructure">
+        <mkdir dir = "unix-tools"/>
+        <mkdir dir = "unix-tools/lib"/>
+        <mkdir dir = "unix-tools/bin"/>
+        <mkdir dir = "unix-tools/docs"/>
+        //copying shell scripts
+        <copy file = "README.md" tofile = "unix-tools/README.md"/>
+    </target>
+
+    <target name = "createJar" depends = "compile,createFolderStructure">
+        <jar destfile = "unix-tools/lib/unix-tools.jar" basedir = "classes"/>
+    </target>
+
+    <target name = "createZip" depends = "createJar,compile,createFolderStructure">
+        <zip destfile = "unix-tools.zip" basedir = "unix-tools" update = "true"/>
+        <delete dir = "unix-tools"/>
+    </target>
+</project>
