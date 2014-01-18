@@ -1,1 +1,1 @@
-java -cp $UNIX_TOOLS/UnixTools.jar pallavig.unixtools.cli.SpaceReducerClient "${@}"
+java -cp $UNIX_TOOLS/lib/unix-tools.jar pallavig/unixtools/cli/SpaceReducerClient "${@}"
