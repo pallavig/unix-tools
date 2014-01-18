@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class WCTest {
     @Test
     public void testCountLines() throws Exception {
-        String data = "pallavi\nprakash\ngoliwale";
+        String data = "pallavi\r\nprakash\r\ngoliwale";
         WC wc = new WC(data);
         int expectedNumberOfLines = 2;
 
@@ -18,7 +18,7 @@ public class WCTest {
 
     @Test
     public void testCountCharacters() throws Exception {
-        String data = "pipe\na";
+        String data = "pipe\r\na";
         WC wc = new WC(data);
         int expectedNumberOfCharacters = 7;
 
