@@ -1,28 +1,49 @@
 <project name = "unix-tools">
     <target name = "clear">
-        <delete dir = "classes"/>
+        <delete dir = "build"/>
+        <delete dir = "build"/>
     </target>
 
     <target name = "compile">
-        <mkdir dir = "classes"/>
-        <javac srcdir = "src" destdir = "classes" includeAntRuntime = "false"/>
+        <mkdir dir = "build/classes"/>
+
+        <javac srcdir = "src" destdir = "build/classes" includeAntRuntime = "false"/>
+    </target>
+
+    <target name="testCompile" depends="compile">
+        <mkdir dir="build/testClasses"></mkdir>
+        <javac srcdir="test" destdir="build/testClasses" includeAntRuntime="false" classpath="build/classes;testlib/junit-4.10.jar"></javac>
+    </target>
+
+    <target name="runTests" depends="testCompile">
+        <java classpath = "testlib/junit-4.10.jar;build/classes;build/testClasses" classname="org.junit.runner.JUnitCore">
+            <arg value = "pallavig.unixtools.wc.WCTest"></arg>
+            <arg value = "pallavig.unixtools.wc.WCOptionProcessorTest"></arg>
+            <arg value="pallavig.unixtools.head.HeadTest"></arg>
+            <arg value="pallavig.unixtools.tail.TailTest"></arg>
+            <arg value="pallavig.unixtools.reducespaces.SpaceReducerTest"></arg>
+            <arg value="pallavig.unixtools.cut.CutTest"></arg>
+            <arg value="pallavig.unixtools.uniq.UniqTest"></arg>
+            <arg value="pallavig.unixtools.sort.SortTest"></arg>
+        </java>
     </target>
 
     <target name = "createFolderStructure">
-        <mkdir dir = "unix-tools"/>
-        <mkdir dir = "unix-tools/lib"/>
-        <mkdir dir = "unix-tools/bin"/>
-        <mkdir dir = "unix-tools/docs"/>
-        //copying shell scripts
-        <copy file = "README.md" tofile = "unix-tools/README.md"/>
+        <mkdir dir = "build/unix-tools"/>
+        <mkdir dir = "build/unix-tools/lib"/>
+        <mkdir dir = "build/unix-tools/bin"/>
+        <mkdir dir = "build/unix-tools/docs"/>
+        <copydir src="shell scripts" dest="build/unix-tools/bin/">
+        </copydir>
+        <copy file = "README.md" tofile = "build/unix-tools/README.md"/>
     </target>
 
-    <target name = "createJar" depends = "compile,createFolderStructure">
-        <jar destfile = "unix-tools/lib/unix-tools.jar" basedir = "classes"/>
+    <target name = "createJar" depends = "runTests,createFolderStructure">
+        <jar destfile = "build/unix-tools/lib/unix-tools.jar" basedir = "build/classes"/>
     </target>
 
     <target name = "createZip" depends = "createJar,compile,createFolderStructure">
-        <zip destfile = "unix-tools.zip" basedir = "unix-tools" update = "true"/>
-        <delete dir = "unix-tools"/>
+        <zip destfile = "build/unix-tools.zip" basedir = "build/unix-tools" update = "true"/>
+        <delete dir = "build/unix-tools"/>
     </target>
 </project>
