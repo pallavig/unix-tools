@@ -1,10 +1,21 @@
 package pallavig.unixtools.cut;
 
 public class CutOptionProcessor {
-    public String fileName;
-    public int fieldNo;
-    public String delimiter;
-    public int[] fieldNumbers;
+    public String getFileName() {
+        return fileName;
+    }
+
+    public String getDelimiter() {
+        return delimiter;
+    }
+
+    public int[] getFieldNumbers() {
+        return fieldNumbers;
+    }
+
+    private String fileName;
+    private String delimiter;
+    private int[] fieldNumbers = {1};
     private boolean isSpecifiedOption(String option, String arg) {
         return arg.startsWith(option);
     }
