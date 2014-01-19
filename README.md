@@ -3,8 +3,9 @@ unix-tools
 
 INSTALLATION
 ============
-Copy the folder from the given location
-Set an environment variable `UNIX_TOOLS` as the path to the given sh files and jar file
+Unzip the folder unix-tools.
+Set an environment variable UNIX_TOOLS to the path of unzipped folder.
+Set the PATH variable to %UNIX_TOOLS%\bin
 
 ##WC
 
@@ -77,9 +78,12 @@ This is Cut tool,which cuts and gives the output according to given command.
 
 `pgcut.sh -f[fieldno] -d[delimiter] filename`
 
+Default field number is 1.
+Default delimiter is tab.
+
 This command will display the contents of specified field
 
-    Example: pgcut.sh -f1,2 -d";" names.txt will display contents with single space of 1st fiels from a.txt
+    Example: pgcut.sh -f1,2 -d";" names.txt will display contents with single space of 1st fields from a.txt
 
 Filename should be the last argument
 
@@ -90,6 +94,9 @@ This is Sort tool, which sorts the given content with given option.
 `pgsort.sh -f[fieldnumber] -d[delimiter] -r filename`
 
 `-r` -- is for reverse
+
+Default field number is 1.
+Default delimiter is space.
 
     Example: `pgsort.sh -f1 -d";" -r a.txt` will display all contents from a.txt file in sorted order.
 
