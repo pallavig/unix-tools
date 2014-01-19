@@ -14,7 +14,6 @@ public class Cut {
         String[] lines = fileData.split("\n");
         StringBuilder result = new StringBuilder("");
         String[] fields;
-        int i;
         for (String line : lines) {
             fields = line.split(delimiter);
             StringBuilder eachLine = new StringBuilder("");

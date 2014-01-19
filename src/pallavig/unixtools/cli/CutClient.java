@@ -8,8 +8,8 @@ public class CutClient {
     public static void main(String[] args) {
         CutOptionProcessor cop = new CutOptionProcessor(args);
         FileContentReader fcr = new FileContentReader();
-        String fileData = fcr.readFile(cop.fileName);
-        Cut cut = new Cut(fileData,cop.fieldNumbers,cop.delimiter);
+        String fileData = fcr.readFile(cop.getFileName());
+        Cut cut = new Cut(fileData,cop.getFieldNumbers(),cop.getDelimiter());
         String result = cut.cutLines();
         System.out.println(result);
     }
