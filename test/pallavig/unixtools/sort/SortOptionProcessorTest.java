@@ -2,27 +2,56 @@ package pallavig.unixtools.sort;
 
 import org.junit.Test;
 
-/**
- * Created by pallavig on 1/19/14.
- */
+import static org.junit.Assert.assertEquals;
+
 public class SortOptionProcessorTest {
     @Test
-    public void testGetFilename() throws Exception {
-
+    public void testOptionProcessorWithOnlyFilename() throws Exception {
+        String args[] = {"a.txt"};
+        SortOptionProcessor sop = new SortOptionProcessor(args);
+        assertEquals(sop.getDelimiter()," ");
+        assertEquals(sop.getFieldNumber(),1);
+        assertEquals(sop.getFilename(),"a.txt");
+        assertEquals(sop.getIsReverse(),false);
     }
 
     @Test
-    public void testGetIsReverse() throws Exception {
-
+    public void testOptionProcessorWithDelimiterAsColan() throws Exception {
+        String args[] = {"a.txt","-d:"};
+        SortOptionProcessor sop = new SortOptionProcessor(args);
+        assertEquals(sop.getDelimiter(),":");
+        assertEquals(sop.getFieldNumber(),1);
+        assertEquals(sop.getFilename(),"a.txt");
+        assertEquals(sop.getIsReverse(),false);
     }
 
     @Test
-    public void testGetFieldNumber() throws Exception {
-
+    public void testOptionProcessorWithFieldNumber() throws Exception {
+        String args[] = {"-f2","a.txt"};
+        SortOptionProcessor sop = new SortOptionProcessor(args);
+        assertEquals(sop.getDelimiter()," ");
+        assertEquals(sop.getFieldNumber(),2);
+        assertEquals(sop.getFilename(),"a.txt");
+        assertEquals(sop.getIsReverse(),false);
     }
 
     @Test
-    public void testGetDelimiter() throws Exception {
+    public void testOptionProcessorWithReverseArgument() throws Exception {
+        String args[] = {"-r","a.txt"};
+        SortOptionProcessor sop = new SortOptionProcessor(args);
+        assertEquals(sop.getDelimiter()," ");
+        assertEquals(sop.getFieldNumber(),1);
+        assertEquals(sop.getFilename(),"a.txt");
+        assertEquals(sop.getIsReverse(),true);
+    }
 
+    @Test
+    public void testOptionProcessorWithAllArguments() throws Exception {
+        String args[] = {"-f2","-d;","-r","a.txt"};
+        SortOptionProcessor sop = new SortOptionProcessor(args);
+        assertEquals(sop.getDelimiter(),";");
+        assertEquals(sop.getFieldNumber(),2);
+        assertEquals(sop.getFilename(),"a.txt");
+        assertEquals(sop.getIsReverse(),true);
     }
 }
