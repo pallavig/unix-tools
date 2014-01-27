@@ -1,49 +1,116 @@
 <project name = "unix-tools">
+    <property file ="build.properties"></property>
+
+
+    <path id="cobertura.classpath">
+        <fileset dir="${cobertura.dir}">
+            <include name="cobertura-2.0.1.jar" />
+            <include name="lib/**/*.jar" />
+        </fileset>
+    </path>
+
+    <taskdef classpathref="cobertura.classpath" resource="tasks.properties"/>
+
     <target name = "clear">
         <delete dir = "build"/>
-        <delete dir = "build"/>
     </target>
 
-    <target name = "compile">
-        <mkdir dir = "build/classes"/>
-
-        <javac srcdir = "src" destdir = "build/classes" includeAntRuntime = "false"/>
+    <target name = "compile" depends="init">
+        <mkdir dir = "${classes}"/>
+        <javac srcdir = "${src}" destdir = "${classes}" includeAntRuntime = "false" debug="yes" debuglevel="vars,lines,source">
+            <classpath refid="cobertura.classpath" />
+        </javac>
+        <mkdir dir="${testClasses}"/>
+        <javac srcdir="${testSrc}" destdir="${testClasses}" includeAntRuntime="false" classpath="${classes};${jarPath}" debug="yes" debuglevel="vars,lines,source">
+            <classpath refid="cobertura.classpath" />
+        </javac>
     </target>
 
-    <target name="testCompile" depends="compile">
-        <mkdir dir="build/testClasses"></mkdir>
-        <javac srcdir="test" destdir="build/testClasses" includeAntRuntime="false" classpath="build/classes;testlib/junit-4.10.jar"></javac>
-    </target>
-
-    <target name="runTests" depends="testCompile">
-        <java classpath = "testlib/junit-4.10.jar;build/classes;build/testClasses" classname="org.junit.runner.JUnitCore">
-            <arg value = "pallavig.unixtools.wc.WCTest"></arg>
-            <arg value = "pallavig.unixtools.wc.WCOptionProcessorTest"></arg>
-            <arg value="pallavig.unixtools.head.HeadTest"></arg>
-            <arg value="pallavig.unixtools.tail.TailTest"></arg>
-            <arg value="pallavig.unixtools.reducespaces.SpaceReducerTest"></arg>
-            <arg value="pallavig.unixtools.cut.CutTest"></arg>
-            <arg value="pallavig.unixtools.uniq.UniqTest"></arg>
-            <arg value="pallavig.unixtools.sort.SortTest"></arg>
-        </java>
-    </target>
-
-    <target name = "createFolderStructure">
-        <mkdir dir = "build/unix-tools"/>
-        <mkdir dir = "build/unix-tools/lib"/>
-        <mkdir dir = "build/unix-tools/bin"/>
-        <mkdir dir = "build/unix-tools/docs"/>
-        <copydir src="shell scripts" dest="build/unix-tools/bin/">
+    <target name="init">
+        <mkdir dir = "${base}"/>
+        <mkdir dir = "${lib}"/>
+        <mkdir dir = "${bin}"/>
+        <copydir src="shell scripts" dest="${bin}">
         </copydir>
-        <copy file = "README.md" tofile = "build/unix-tools/README.md"/>
+        <copy file = "README.md" tofile = "build/dist/README.md"/>
+        <mkdir dir="${classes}" />
+        <mkdir dir="${instrumented.dir}" />
+        <mkdir dir="${reports.xml.dir}" />
+        <mkdir dir="${reports.html.dir}" />
+        <mkdir dir="${coverage.xml.dir}" />
+        <mkdir dir="${coverage.summaryxml.dir}" />
+        <mkdir dir="${coverage.html.dir}" />
     </target>
 
-    <target name = "createJar" depends = "runTests,createFolderStructure">
-        <jar destfile = "build/unix-tools/lib/unix-tools.jar" basedir = "build/classes"/>
+    <target name="instrument" depends="init,compile">
+        <delete file="cobertura.ser"/>
+        <delete dir="${instrumented.dir}" />
+        <cobertura-instrument todir="${instrumented.dir}">
+            <fileset dir="${classes}">
+                <include name="**/*.class" />
+            </fileset>
+        </cobertura-instrument>
     </target>
 
-    <target name = "createZip" depends = "createJar,compile,createFolderStructure">
-        <zip destfile = "build/unix-tools.zip" basedir = "build/unix-tools" update = "true"/>
-        <delete dir = "build/unix-tools"/>
+    <target name="test" depends="init,compile">
+        <junit fork="yes" dir="." failureProperty="test.failed">
+            <classpath>
+                <pathelement location="build/instrumented"/>
+                <pathelement location="build/classes" />
+                <pathelement location="build/testClasses" />
+                <pathelement location="testlib/junit-4.10.jar"/>
+            </classpath>
+
+            <classpath refid= "cobertura.classpath"/>
+
+            <formatter type="xml" />
+            <test name="testcase" todir="build/reports/junit-xml" if="testcase" />
+            <batchtest todir="build/reports/junit-xml" unless="testcase">
+                <fileset dir="test">
+                    <include name="**/*Test.java" />
+                </fileset>
+            </batchtest>
+        </junit>
+        <junitreport todir="build/reports/junit-xml">
+            <fileset dir="build/reports/junit-xml">
+                <include name="TEST-*.xml" />
+            </fileset>
+            <report format="frames" todir="build/reports/junit-html" />
+        </junitreport>
     </target>
+
+    <target name="coverage-check">
+        <cobertura-check branchrate="34" totallinerate="100" />
+    </target>
+
+    <target name="coverage-report">
+        <cobertura-report srcdir="${src}" destdir="${coverage.xml.dir}" format="xml" />
+    </target>
+
+    <target name="summary-coverage-report">
+        <cobertura-report srcdir="${src}" destdir="${coverage.summaryxml.dir}" format="summaryXml" />
+    </target>
+
+    <target name="alternate-coverage-report">
+        <cobertura-report destdir="${coverage.html.dir}">
+            <fileset dir="${src}">
+                <include name="**/*.java"/>
+            </fileset>
+        </cobertura-report>
+    </target>
+
+    <target name="coverage" depends="compile,instrument,test,coverage-report,summary-coverage-report,alternate-coverage-report"
+            description="Compile, instrument ourself, run the tests and generate JUnit and coverage reports."/>
+
+    <target name = "createJar" depends = "test">
+        <mkdir dir="build/dist"></mkdir>
+        <jar destfile = "build/dist/lib/unix-tools.jar" basedir = "build/classes"/>
+        <copy file="README.md" tofile="build/dist/README.md"></copy>
+        <copy file="config.properties" tofile="build/dist/config.properties"></copy>
+    </target>
+
+    <target name = "createZip" depends = "createJar,test">
+        <zip destfile = "build/unix-tools.zip" basedir = "build/dist/" update = "true"/>
+    </target>
+
 </project>

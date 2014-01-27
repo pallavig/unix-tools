@@ -9,7 +9,7 @@ public class HeadTailOptionProcessor {
             filename = args[1];
             return;
         }
-        numberOfRows = 10;
+        numberOfRows = 0;
         filename = args[0];
     }
 }
