@@ -20,7 +20,7 @@ public class TailClient {
         int defaultLines;
         if(numberOfRows == 0){
             try {
-                BufferedReader br = new BufferedReader(new FileReader("config.properties"));
+                BufferedReader br = new BufferedReader(new FileReader(System.getenv("UNIX_TOOLS")+"/config.properties"));
                 tailDefaultLines.load(br);
                 defaultLines = Integer.parseInt(tailDefaultLines.getProperty("Tail-Default-Lines"));
                 numberOfRows = defaultLines;
